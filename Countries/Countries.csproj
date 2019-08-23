@@ -2,10 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>CountriesExtended</PackageId>
-    <Authors />
-    <Product />
-    <Company />
+    <Version>1.0.0</Version>
+    <Authors>Gabriel Kenderessy</Authors>
+    <Company>Air Canada</Company>
+    <Product>CountriesExtended</Product>
+    <Description>ISO 3166 countries library, including: common Name, official Name, TLD,two and three letter country code, ISO numeric code, CIOC, currencies, callingCodes, capital, alternative spellings, region, subRegion, borders, is landlocked and area in square kilometers.</Description>
+    <PackageReleaseNotes>Forked from Maddalena.Countries - Added Administrative Regions</PackageReleaseNotes>
+    <RepositoryType>Git</RepositoryType>
+    <PackageProjectUrl>https://github.com/AirCanada/Countries</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/AirCanada/Countries/License</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/AirCanada/Countries</RepositoryUrl>
+    <Copyright>2016 Maddalena Tech</Copyright>
   </PropertyGroup>
 
 </Project>
