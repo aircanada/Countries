@@ -7,7 +7,6 @@ namespace Maddalena
 {
     public enum CountryCodeISO3
     {
-        World,
         ABW,
         AFG,
         AGO,
@@ -259,7 +258,6 @@ namespace Maddalena
     }
     public enum CountryCode
     {
-        World,
         AW,
         AF,
         AO,
@@ -338,7 +336,7 @@ namespace Maddalena
         FO,
         FM,
         GA,
-        GB,
+        UK,
         GE,
         GG,
         GH,
@@ -519,6 +517,7 @@ namespace Maddalena
         public string ISONumeric { get; private set; }
         public CountryCodeISO3 ISO3 { get; private set; }
         public string CIOC { get; private set; }
+        public AdministrativeRegion[] AdministrativeRegions { get; private set; }
         public string[] Currencies { get; private set; }
         public string[] CallingCodes { get; private set; }
         public string Capital { get; private set; }
@@ -561,48 +560,22 @@ namespace Maddalena
 
         public static Country FromCode(CountryCode cc)
         {
-            return All.FirstOrDefault(x => x.CountryCode == cc) ?? World;
+            return All.FirstOrDefault(x => x.CountryCode == cc);
         }
 
         public static Country FromCode(CountryCodeISO3 cc)
         {
-            return All.FirstOrDefault(x => x.ISO3 == cc) ?? World;
+            return All.FirstOrDefault(x => x.ISO3 == cc);
         }
 
         public static IEnumerable<Country> All
         {
             get
             {
-                foreach (var k in typeof(Country).GetProperties().Where(x => x.PropertyType == typeof(Country)))
+                foreach (var k in typeof(Country).GetRuntimeProperties().Where(x => x.PropertyType == typeof(Country)))
                 {
-                    yield return k.GetValue(null,null) as Country;
+                    yield return k.GetValue(null) as Country;
                 }
-            }
-        }
-
-        public static Country World
-        {
-            get
-            {
-                return new Country
-                {
-                    CommonName = "World",
-                    OfficialName = "World",
-                    TLD = new[] { ".com" },
-                    CountryCode = CountryCode.World,
-                    ISONumeric = "",
-                    ISO3 = CountryCodeISO3.ABW,
-                    CIOC = "",
-                    Currencies = new string[0],
-                    CallingCodes = new string[0],
-                    Capital = "",
-                    AlternativeSpellings = new string[0],
-                    Region = "",
-                    SubRegion = "",
-                    Borders = new CountryCodeISO3[] { },
-                    Landlocked = false,
-                    Area = 510072000,
-                };
             }
         }
 
@@ -1566,6 +1539,21 @@ namespace Maddalena
                     ISONumeric = "124",
                     ISO3 = CountryCodeISO3.CAN,
                     CIOC = "CAN",
+                    AdministrativeRegions = new[] {
+                        AdministrativeRegion.Ontario,
+                        AdministrativeRegion.Quebec,
+                        AdministrativeRegion.NovaScotia,
+                        AdministrativeRegion.NewBrunswick,
+                        AdministrativeRegion.Manitoba,
+                        AdministrativeRegion.BritishColumbia,
+                        AdministrativeRegion.PrinceEdwardIsland,
+                        AdministrativeRegion.Saskatchewan,
+                        AdministrativeRegion.Alberta,
+                        AdministrativeRegion.NewfoundlandAndLabrador,
+                        AdministrativeRegion.NorthwestTerritories,
+                        AdministrativeRegion.Yukon,
+                        AdministrativeRegion.Nunavut
+                    },
                     Currencies = new[] { "CAD" },
                     CallingCodes = new[] { "1" },
                     Capital = "Ottawa",
@@ -2562,7 +2550,7 @@ namespace Maddalena
                     CommonName = "United Kingdom",
                     OfficialName = "United Kingdom of Great Britain and Northern Ireland",
                     TLD = new[] { ".uk" },
-                    CountryCode = CountryCode.GB,
+                    CountryCode = CountryCode.UK,
                     ISONumeric = "826",
                     ISO3 = CountryCodeISO3.GBR,
                     CIOC = "GBR",
@@ -6439,6 +6427,65 @@ namespace Maddalena
                     ISONumeric = "840",
                     ISO3 = CountryCodeISO3.USA,
                     CIOC = "USA",
+                    AdministrativeRegions = new[]
+                    {
+                        AdministrativeRegion.Alabama,
+                        AdministrativeRegion.Alaska,
+                        AdministrativeRegion.Arizona,
+                        AdministrativeRegion.Arkansas,
+                        AdministrativeRegion.California,
+                        AdministrativeRegion.Colorado,
+                        AdministrativeRegion.Connecticut,
+                        AdministrativeRegion.Delaware,
+                        AdministrativeRegion.Florida,
+                        AdministrativeRegion.Georgia,
+                        AdministrativeRegion.Hawaii,
+                        AdministrativeRegion.Idaho,
+                        AdministrativeRegion.Illinois,
+                        AdministrativeRegion.Indiana,
+                        AdministrativeRegion.Iowa,
+                        AdministrativeRegion.Kansas,
+                        AdministrativeRegion.Kentucky,
+                        AdministrativeRegion.Louisiana,
+                        AdministrativeRegion.Maine,
+                        AdministrativeRegion.Maryland,
+                        AdministrativeRegion.Massachusetts,
+                        AdministrativeRegion.Michigan,
+                        AdministrativeRegion.Minnesota,
+                        AdministrativeRegion.Mississippi,
+                        AdministrativeRegion.Missouri,
+                        AdministrativeRegion.Montana,
+                        AdministrativeRegion.Nebraska,
+                        AdministrativeRegion.Nevada,
+                        AdministrativeRegion.NewHampshire,
+                        AdministrativeRegion.NewJersey,
+                        AdministrativeRegion.NewMexico,
+                        AdministrativeRegion.NewYork,
+                        AdministrativeRegion.NorthCarolina,
+                        AdministrativeRegion.NorthDakota,
+                        AdministrativeRegion.Ohio,
+                        AdministrativeRegion.Oklahoma,
+                        AdministrativeRegion.Oregon,
+                        AdministrativeRegion.Pennsylvania,
+                        AdministrativeRegion.RhodeIsland,
+                        AdministrativeRegion.SouthCarolina,
+                        AdministrativeRegion.SouthDakota,
+                        AdministrativeRegion.Tennessee,
+                        AdministrativeRegion.Texas,
+                        AdministrativeRegion.Utah,
+                        AdministrativeRegion.Vermont,
+                        AdministrativeRegion.Virginia,
+                        AdministrativeRegion.Washington,
+                        AdministrativeRegion.WestVirginia,
+                        AdministrativeRegion.Wisconsin,
+                        AdministrativeRegion.Wyoming,
+                        AdministrativeRegion.DistrictOfColumbia,
+                        AdministrativeRegion.AmericanSamoa,
+                        AdministrativeRegion.Guam,
+                        AdministrativeRegion.NorthernMarianaIslands,
+                        AdministrativeRegion.PuertoRico,
+                        AdministrativeRegion.UnitedStatesVirginIslands
+                    },
                     Currencies = new[] { "USD", "USN", "USS" },
                     CallingCodes = new[] { "1" },
                     Capital = "Washington D.C.",
